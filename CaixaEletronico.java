@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class CaixaEletronico {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
+    ArrayList<String> historico = new ArrayList<>();
+    
         double saldo = 1000.00;
         String senhaCorreta = "1234";
         int tentativas = 3;
@@ -52,6 +55,7 @@ public class CaixaEletronico {
 
                     if (deposito > 0) {
                         saldo += deposito;
+                        historico.add("Deposito: +R$ " + deposito);
                         System.out.println("Depósito realizado com sucesso!\n");
                     } else {
                         System.out.println("Valor inválido!\n");
@@ -64,7 +68,7 @@ public class CaixaEletronico {
 
                     if (saque > 0 && saque <= saldo) {
                         saldo -= saque;
-                        System.out.println("Saque realizado com sucesso!\n");
+                        historico.add("Saque: -R$ " + saque);                        System.out.println("Saque realizado com sucesso!\n");
                     } else {
                         System.out.println("Saldo insuficiente ou valor inválido!\n");
                     }
@@ -72,6 +76,8 @@ public class CaixaEletronico {
 
                 case 4:
                     System.out.println("===== EXTRATO =====");
+                    for (String transacao : historico) {
+                        System.out.println(transacao);                    }
                     System.out.printf("Saldo disponível: R$ %.2f\n\n", saldo);
                     break;
 
